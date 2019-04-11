@@ -1,10 +1,12 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Router = ({
     routes,
-    pathPrefix
+    pathPrefix,
+    redirectTo,
+    defaultRender
 }) => {
     /* eslint-disable react/prop-types */
     function createRoute({
@@ -14,7 +16,7 @@ const Router = ({
         ...pass
     }) {
         const renderThis = Component
-            ? <Component />
+            ? () => <Component />
             : render();
 
         const appendPath = pathPrefix
@@ -30,11 +32,33 @@ const Router = ({
         );
     }
 
+    function createDefaultFallback() {
+        // If the `defaultRender` prop is provided,
+        // use that. Otherwise, try using the `redirectTo` link.
+
+        if (defaultRender) {
+            return (
+                <Route
+                    render={ defaultRender }
+                />
+            );
+        }
+
+        return redirectTo
+            ? (
+                <Redirect
+                    to={ redirectTo }
+                />
+            )
+            : null;
+    }
+
     /* eslint-enable react/prop-types */
 
     return (
         <Switch>
             { routes.map(createRoute) }
+            { createDefaultFallback() }
         </Switch>
     );
 };
@@ -43,11 +67,16 @@ Router.propTypes = {
     pathPrefix: PropTypes.string,
     routes: PropTypes
         .arrayOf(PropTypes.shape({}))
-        .isRequired
+        .isRequired,
+
+    redirectTo: PropTypes.string,
+    defaultRender: PropTypes.func
 };
 
 Router.defaultProps = {
-    pathPrefix: null
+    pathPrefix: null,
+    redirectTo: null,
+    defaultRender: null
 };
 
 export default Router;
