@@ -11,10 +11,12 @@ const Router = ({
     /* eslint-disable react/prop-types */
     function createRoute({
         path,
+        exact,
         component: Component,
         render,
         ...pass
     }) {
+        const exactRoute = exact || true;
         let renderThis = null;
 
         if (Component) {
@@ -33,6 +35,7 @@ const Router = ({
 
         return (
             <Route
+                exact={ exactRoute }
                 path={ appendPath }
                 render={ () => renderThis }
             />
