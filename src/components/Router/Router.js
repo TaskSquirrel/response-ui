@@ -15,9 +15,17 @@ const Router = ({
         render,
         ...pass
     }) {
-        const renderThis = Component
-            ? () => <Component />
-            : render();
+        let renderThis = null;
+
+        if (Component) {
+            renderThis = (
+                <Component
+                    { ...pass }
+                />
+            );
+        } else if (typeof render === "function") {
+            renderThis = render(pass);
+        }
 
         const appendPath = pathPrefix
             ? `${pathPrefix}${path}`
@@ -25,9 +33,8 @@ const Router = ({
 
         return (
             <Route
-                { ...pass }
                 path={ appendPath }
-                render={ renderThis }
+                render={ () => renderThis }
             />
         );
     }
