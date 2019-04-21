@@ -1,0 +1,11 @@
+.textbox {
+    position: relative;
+
+    background-color: transparent;
+    border: none;
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}

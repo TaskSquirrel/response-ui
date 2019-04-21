@@ -1,0 +1,20 @@
+.textbox {
+    padding: 0.8rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+    background-color: var(--white);
+
+    transition:
+        border-color 100ms ease-in-out;
+
+    &:focus {
+        border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+        color: rgba(0, 0, 0, 0.5);
+        background-color: rgb(245, 245, 245);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+}
