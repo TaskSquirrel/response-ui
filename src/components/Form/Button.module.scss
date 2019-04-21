@@ -1,0 +1,24 @@
+.button {
+    cursor: pointer;
+
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+
+    color: var(--white);
+    background-color: var(--primary);
+
+    transition:
+        color 100ms ease-in-out,
+        background-color 100ms ease-in-out;
+
+    &:hover {
+        background-color: var(--primary-lighter);
+    }
+
+    &:disabled {
+        cursor: default;
+
+        color: rgba(255, 255, 255, 0.7);
+        background-color: #d4d4d4;
+    }
+}
