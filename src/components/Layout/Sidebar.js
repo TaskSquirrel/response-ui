@@ -1,17 +1,27 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+
+import MatchesPath from "../Router/MatchesPath";
+
+import noop from "../../utils/noop";
 
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = ({
-    links,
-    location: { pathname: pathName }
+    links
 }) => (
     <aside
-        className={ styles.sidebar }
+        className={ classNames(
+            styles.sidebar
+        ) }
     >
+        <div
+            className={ styles.corner }
+        >
+            Corner
+        </div>
         <nav
             className={ styles.navigation }
         >
@@ -19,34 +29,40 @@ const Sidebar = ({
                 className={ styles.group }
             >
                 {
-                    links.map(({ path, title }) => {
-                        const pathMatches = path === pathName;
-
-                        return (
-                            <li
-                                key={ title }
-                                className={ classNames(
-                                    styles.item,
-                                    pathMatches && styles.selected
-                                ) }
-                            >
-                                <Link
-                                    to={ path }
-                                    className={ styles.link }
+                    links.map(({ path, title, exact }) => (
+                        <MatchesPath
+                            key={ path }
+                            path={ path }
+                            exact={ exact }
+                        >
+                            { matches => (
+                                <li
+                                    key={ title }
+                                    className={ classNames(
+                                        styles.item,
+                                        matches && styles.selected
+                                    ) }
                                 >
-                                    <span
-                                        className={ classNames(
-                                            styles.highlight,
-                                            pathMatches && styles.selected
-                                        ) }
-                                    />
-                                    <span>
-                                        { title }
-                                    </span>
-                                </Link>
-                            </li>
-                        );
-                    })
+                                    <Link
+                                        to={ path }
+                                        className={ styles.link }
+                                    >
+                                        <span
+                                            className={ classNames(
+                                                styles.highlight,
+                                                matches && styles.selected
+                                            ) }
+                                        />
+                                        <span
+                                            className={ styles.title }
+                                        >
+                                            { title }
+                                        </span>
+                                    </Link>
+                                </li>
+                            ) }
+                        </MatchesPath>
+                    ))
                 }
             </ul>
         </nav>
@@ -56,10 +72,7 @@ const Sidebar = ({
 Sidebar.propTypes = {
     links: PropTypes
         .arrayOf(PropTypes.shape({}))
-        .isRequired,
-
-    // React router
-    location: PropTypes.shape({}).isRequired
+        .isRequired
 };
 
-export default withRouter(Sidebar);
+export default Sidebar;

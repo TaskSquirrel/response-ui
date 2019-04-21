@@ -1,20 +1,38 @@
-$sidebar-top-padding: 15vh;
+@import "../../styles/breakpoints";
+
+$sidebar-top-padding: 10vh;
 $sidebar-bottom-padding: 10vh;
-$sidebar-height: 100vh - $sidebar-top-padding - $sidebar-bottom-padding;
+$sidebar-height: 100vh - $sidebar-bottom-padding;
 
 .sidebar {
     position: sticky;
     top: 0;
 
     // TODO: add dynamic padding
-    padding-top: 15vh;
-    padding-bottom: 10vh;
+    padding-bottom: $sidebar-bottom-padding;
 
-    min-width: 12%;
+    width: 100px;
+    min-width: 60px;
+    max-width: 10%;
     height: $sidebar-height;
 
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.3);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+    transition:
+        width 250ms ease-in-out,
+        color 250ms ease-in-out,
+        background-color 250ms ease-in-out;
+
+    @media (min-width: $md) {
+        min-width: 15%;
+
+        background-color: var(--white);
+    }
+}
+
+.corner {
+    height: $sidebar-top-padding;
 }
 
 .navigation {
@@ -35,11 +53,13 @@ $sidebar-height: 100vh - $sidebar-top-padding - $sidebar-bottom-padding;
 .item {
     display: flex;
 
+    position: relative;
     height: 4rem;
 
     transition: background-color 200ms ease-out;
 
-    &.selected {
+    &.selected,
+    &.selected:hover {
         background-color: rgba(0, 0, 0, 0.1);
     }
 
@@ -60,10 +80,11 @@ $sidebar-height: 100vh - $sidebar-top-padding - $sidebar-bottom-padding;
 }
 
 .highlight {
-    width: 5px;
-    height: 100%;
+    position: absolute;
+    left: 0;
 
-    margin-right: 1.5rem;
+    width: 3px;
+    height: 100%;
 
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
@@ -72,5 +93,13 @@ $sidebar-height: 100vh - $sidebar-top-padding - $sidebar-bottom-padding;
 
     &.selected {
         opacity: 1;
+    }
+}
+
+.title {
+    visibility: hidden;
+
+    @media (min-width: $md) {
+        visibility: visible;
     }
 }
