@@ -1,29 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
+import { HashRouter } from "react-router-dom";
 
-import logo from "./logo.svg";
-import "./App.css";
+import Development from "./components/Development";
+import PageRouter from "./components/PageRouter";
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                        Welcome to React.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
-                </header>
-            </div>
-        );
-    }
-}
+import "./App.module.scss";
+
+const App = () => (
+    <React.StrictMode>
+        <HashRouter>
+            <Development>
+                <PageRouter />
+            </Development>
+        </HashRouter>
+    </React.StrictMode>
+);
 
 export default App;
