@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
+import sidebarRoutes from "../../routes/sidebar";
+
 import styles from "./Skeleton.module.scss";
 
 const Skeleton = ({
@@ -31,7 +33,11 @@ const Skeleton = ({
 
 Skeleton.propTypes = {
     children: PropTypes.node.isRequired,
-    sidebarLinks: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    sidebarLinks: PropTypes.arrayOf(PropTypes.shape({}))
+};
+
+Skeleton.defaultProps = {
+    sidebarLinks: sidebarRoutes
 };
 
 export default Skeleton;

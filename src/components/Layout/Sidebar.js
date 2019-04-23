@@ -5,8 +5,6 @@ import classNames from "classnames";
 
 import MatchesPath from "../Router/MatchesPath";
 
-import noop from "../../utils/noop";
-
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = ({

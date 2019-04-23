@@ -1,15 +1,11 @@
 @import "../../styles/breakpoints";
 
 $sidebar-top-padding: 10vh;
-$sidebar-bottom-padding: 10vh;
-$sidebar-height: 100vh - $sidebar-bottom-padding;
+$sidebar-height: 100vh;
 
 .sidebar {
     position: sticky;
     top: 0;
-
-    // TODO: add dynamic padding
-    padding-bottom: $sidebar-bottom-padding;
 
     width: 100px;
     min-width: 60px;
@@ -24,7 +20,7 @@ $sidebar-height: 100vh - $sidebar-bottom-padding;
         color 250ms ease-in-out,
         background-color 250ms ease-in-out;
 
-    @media (min-width: $md) {
+    @media (min-width: $lg) {
         min-width: 15%;
 
         background-color: var(--white);
@@ -99,7 +95,7 @@ $sidebar-height: 100vh - $sidebar-bottom-padding;
 .title {
     visibility: hidden;
 
-    @media (min-width: $md) {
+    @media (min-width: $lg) {
         visibility: visible;
     }
 }
