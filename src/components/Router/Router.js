@@ -14,7 +14,8 @@ const Router = ({
         exact,
         component: Component,
         render,
-        ...pass
+        renderProps = {},
+        ...rest
     }) {
         const exactRoute = exact || true;
         let renderThis = null;
@@ -22,11 +23,11 @@ const Router = ({
         if (Component) {
             renderThis = (
                 <Component
-                    { ...pass }
+                    { ...renderProps }
                 />
             );
         } else if (typeof render === "function") {
-            renderThis = render(pass);
+            renderThis = render(renderProps);
         }
 
         const appendPath = pathPrefix
@@ -35,9 +36,11 @@ const Router = ({
 
         return (
             <Route
+                key={ path }
                 exact={ exactRoute }
                 path={ appendPath }
                 render={ () => renderThis }
+                { ...rest }
             />
         );
     }
