@@ -32,7 +32,13 @@ const Upload = ({
             );
         }
 
-        return file.name;
+        return (
+            <span
+                className={ styles.filename }
+            >
+                { file.name }
+            </span>
+        );
     }
 
     function uploadFiles(files) {

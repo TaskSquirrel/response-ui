@@ -1,11 +1,13 @@
 .upload {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     color: #7d7d7d;
 
     position: relative;
 
+    min-height: 100px;
     padding: 1.5rem;
 
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -28,4 +30,8 @@
 .choose {
     color: var(--primary);
     font-weight: bold;
+}
+
+.filename {
+    font-family: "SF Mono", monospace;
 }
