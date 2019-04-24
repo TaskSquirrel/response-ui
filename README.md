@@ -13,10 +13,12 @@ UI for the Computing for Good Outcomes team project for Response of Suffolk Coun
 git clone https://github.com/TaskSquirrel/response-ui
 cd response-ui
 npm install
-npm start
+npm run app-dev
 ```
+
+Will start local webserver and Electron process.
 
 ## Features in-progress
 
-* User sign-in
+* Upload wizard
 * Dashboard screen
