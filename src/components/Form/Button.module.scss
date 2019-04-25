@@ -1,7 +1,9 @@
-.button {
-    cursor: pointer;
+$colors: (
+    gray: rgb(90, 90, 90)
+);
 
-    padding: 0.8rem 1rem;
+.button {
+    padding: 0.6rem 1rem;
     border-radius: 5px;
 
     color: var(--white);
@@ -9,10 +11,16 @@
 
     transition:
         color 100ms ease-in-out,
-        background-color 100ms ease-in-out;
+        background-color 100ms ease-in-out,
+        box-shadow 100ms ease-in-out;
 
     &:hover {
         background-color: var(--primary-lighter);
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.25);
+        outline: none;
     }
 
     &:disabled {
@@ -20,5 +28,23 @@
 
         color: rgba(255, 255, 255, 0.7);
         background-color: #d4d4d4;
+    }
+
+    &.inverted {
+        color: var(--primary);
+        background-color: var(--white);
+        border: 1px solid var(--primary);
+    }
+}
+
+.gray {
+    $color: rgb(90, 90, 90);
+
+    background-color: $color;
+
+    &.inverted {
+        color: $color;
+        background-color: var(--white);
+        border-color: $color;
     }
 }

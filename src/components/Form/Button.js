@@ -8,19 +8,36 @@ import styles from "./Button.module.scss";
 
 const Button = ({
     className,
+    inverted,
+    theme,
     ...rest
 }) => (
     <ButtonBase
         className={ classNames(
             styles.button,
+            theme !== "default" && Button.Themes[theme],
+            inverted && styles.inverted,
             className
         ) }
         { ...rest }
     />
 );
 
-Button.propTypes = ButtonBase.propTypes;
+Button.Themes = {
+    default: null,
+    gray: styles.gray
+};
 
-Button.defaultProps = ButtonBase.defaultProps;
+Button.propTypes = {
+    ...ButtonBase.propTypes,
+    inverted: PropTypes.bool,
+    theme: PropTypes.oneOf(Object.keys(Button.Themes))
+};
+
+Button.defaultProps = {
+    ...ButtonBase.defaultProps,
+    inverted: false,
+    theme: "default"
+};
 
 export default Button;
