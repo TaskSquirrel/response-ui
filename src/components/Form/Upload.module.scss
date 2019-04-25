@@ -27,6 +27,10 @@
     opacity: 0;
 }
 
+.text {
+    text-overflow: ellipsis;
+}
+
 .choose {
     color: var(--primary);
     font-weight: bold;

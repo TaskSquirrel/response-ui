@@ -70,7 +70,9 @@ const Upload = ({
                 onDragLeave={ () => setHovering(false) }
                 onDrop={ handleDrop }
             />
-            <div>
+            <div
+                className={ styles.text }
+            >
                 { renderFileDialog() }
             </div>
         </div>
