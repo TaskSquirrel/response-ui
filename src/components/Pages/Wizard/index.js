@@ -7,39 +7,34 @@ import WizardView from "./WizardView";
 import wizardSlides from "./wizard";
 
 const Wizard = () => {
-    function createFilesState(collections) {
-        const state = {};
-
-        collections.forEach(({ id }) => {
-            state[id] = null;
-        });
-
-        return state;
-    }
-
     const [started, setStarted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [step, setStep] = useState(0);
-    const [files, setFiles] = useState(createFilesState(wizardSlides));
+    const [files, setFiles] = useState([]);
 
     const { id, title, subtitle } = wizardSlides[step];
     const prevable = step > 0;
     const nextable = step < wizardSlides.length - 1;
-    const currentFile = files[id];
+    const currentFile = files.find(({ id: fileID }) => id === fileID);
 
     function calculatePercentage() {
         return (step + 1) / wizardSlides.length;
     }
 
-    function updateFiles(slideID, fileRef) {
-        setFiles({
-            ...files,
-            [slideID]: fileRef
-        });
+    function addFile(setID, file) {
+        const nextFiles = [
+            ...files.filter(({ id: fileID }) => setID !== fileID),
+            {
+                id,
+                file
+            }
+        ];
+
+        setFiles(nextFiles);
     }
 
     function uploadFile(file) {
-        updateFiles(id, file);
+        addFile(id, file);
     }
 
     function prev() {
@@ -61,8 +56,7 @@ const Wizard = () => {
     function done() {
         setLoading(true);
 
-        Object.keys(files).forEach(key => {
-            const file = files[key];
+        files.forEach(({ file }) => {
             const read = new FileReader();
 
             read.addEventListener("load", () => {
@@ -81,7 +75,11 @@ const Wizard = () => {
                 percentage={ calculatePercentage() }
                 title={ title }
                 subtitle={ subtitle }
-                file={ currentFile }
+                file={
+                    currentFile
+                        ? currentFile.file
+                        : null
+                }
                 prevable={ prevable }
                 nextable={ nextable }
                 upload={ uploadFile }
