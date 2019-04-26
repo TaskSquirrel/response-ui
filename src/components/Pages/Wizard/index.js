@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Landing from "./Landing";
+import WizardViewWrapper from "./WizardViewWrapper";
 import WizardView from "./WizardView";
 
 import wizardSlides from "./wizard";
@@ -15,6 +17,8 @@ const Wizard = () => {
         return state;
     }
 
+    const [started, setStarted] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [step, setStep] = useState(0);
     const [files, setFiles] = useState(createFilesState(wizardSlides));
 
@@ -22,6 +26,10 @@ const Wizard = () => {
     const prevable = step > 0;
     const nextable = step < wizardSlides.length - 1;
     const currentFile = files[id];
+
+    function calculatePercentage() {
+        return (step + 1) / wizardSlides.length;
+    }
 
     function updateFiles(slideID, fileRef) {
         setFiles({
@@ -50,18 +58,52 @@ const Wizard = () => {
         setStep(step + 1);
     }
 
+    function done() {
+        setLoading(true);
+
+        Object.keys(files).forEach(key => {
+            const file = files[key];
+            const read = new FileReader();
+
+            read.addEventListener("load", () => {
+                console.log(read.result);
+            });
+
+            read.readAsDataURL(file);
+        });
+    }
+
+    function renderWizardView() {
+        return (
+            <WizardView
+                loading={ loading }
+                step={ step + 1 }
+                percentage={ calculatePercentage() }
+                title={ title }
+                subtitle={ subtitle }
+                file={ currentFile }
+                prevable={ prevable }
+                nextable={ nextable }
+                upload={ uploadFile }
+                prev={ prev }
+                next={ next }
+                done={ done }
+            />
+        );
+    }
+
     return (
-        <WizardView
-            step={ step + 1 }
-            title={ title }
-            subtitle={ subtitle }
-            file={ currentFile }
-            prevable={ prevable }
-            nextable={ nextable }
-            upload={ uploadFile }
-            prev={ prev }
-            next={ next }
-        />
+        <WizardViewWrapper>
+            {
+                started
+                    ? renderWizardView()
+                    : (
+                        <Landing
+                            start={ () => setStarted(true) }
+                        />
+                    )
+            }
+        </WizardViewWrapper>
     );
 };
 
