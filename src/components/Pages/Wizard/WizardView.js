@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "react-loader-spinner";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
@@ -60,7 +61,16 @@ const WizardView = ({
     }
 
     if (loading) {
-        return "Loading...";
+        return (
+            <div
+                className={ styles.loader }
+            >
+                <Loader
+                    type="ThreeDots"
+                    color="#000000"
+                />
+            </div>
+        );
     }
 
     return (
