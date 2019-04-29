@@ -66,6 +66,7 @@ $sidebar-height: 100vh;
 
 .link {
     display: flex;
+    justify-content: center;
     align-items: center;
 
     width: 100%;
@@ -73,6 +74,14 @@ $sidebar-height: 100vh;
 
     color: rgba(0, 0, 0, 0.6);
     font-weight: bold;
+
+    @media (min-width: $lg) {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        grid-column-gap: 0.2rem;
+
+        margin-left: 2rem;
+    }
 }
 
 .highlight {
@@ -92,10 +101,18 @@ $sidebar-height: 100vh;
     }
 }
 
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .title {
+    position: absolute;
     visibility: hidden;
 
     @media (min-width: $lg) {
+        position: relative;
         visibility: visible;
     }
 }

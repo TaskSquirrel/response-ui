@@ -27,7 +27,12 @@ const Sidebar = ({
                 className={ styles.group }
             >
                 {
-                    links.map(({ path, title, exact }) => (
+                    links.map(({
+                        path,
+                        title,
+                        exact,
+                        icon
+                    }) => (
                         <MatchesPath
                             key={ path }
                             path={ path }
@@ -51,6 +56,18 @@ const Sidebar = ({
                                                 matches && styles.selected
                                             ) }
                                         />
+                                        <span
+                                            className={ styles.icon }
+                                        >
+                                            {
+                                                icon && (
+                                                    <img
+                                                        src={ icon }
+                                                        alt={ title }
+                                                    />
+                                                )
+                                            }
+                                        </span>
                                         <span
                                             className={ styles.title }
                                         >
