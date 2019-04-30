@@ -6,6 +6,8 @@ import Button from "../../Form/Button";
 
 import styles from "./Wizard.module.scss";
 
+const { ipcRenderer } = window.require("electron");
+
 const WizardView = ({
     step,
     title,
@@ -40,6 +42,10 @@ const WizardView = ({
                 </Button>
             </div>
         );
+    }
+
+    function meow() {
+        ipcRenderer.send("echo");
     }
 
     return (
@@ -81,6 +87,12 @@ const WizardView = ({
                     onUpload={ upload }
                 />
                 { renderNavigationButtons(file) }
+            </div>
+
+            <div>
+                <button type="button" onClick={ meow }>
+                    Connect to server.py!
+                </button>
             </div>
         </main>
     );
