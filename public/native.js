@@ -36,6 +36,7 @@ function createLoadingScreen() {
 
 function start() {
     connect();
+
     const loading = createLoadingScreen();
     const main = new BrowserWindow({
         show: false,
@@ -58,6 +59,11 @@ function start() {
             })
     );
 
+    main.on("ready-to-show", () => {
+        loading.destroy();
+        main.show();
+    });
+
     ipcMain.on("welcome", (event, data) => {
         const notif = new Notification({
             title: "Welcome!",
@@ -70,8 +76,8 @@ function start() {
 
     ipcMain.on("echo", (event, data) => {
         const client = new zerorpc.Client();
-        client.connect("tcp://127.0.0.1:6111");
 
+        client.connect("tcp://127.0.0.1:6111");
         client.invoke("echo", (error, res) => {
             if (error) {
                 console.error(error);
