@@ -10,6 +10,8 @@ import ButtonBase from "../../Form/ButtonBase";
 
 import styles from "./Wizard.module.scss";
 
+const { ipcRenderer } = window.require("electron");
+
 const WizardView = ({
     loading,
     step,
@@ -60,6 +62,10 @@ const WizardView = ({
         );
     }
 
+    function meow() {
+        ipcRenderer.send("echo");
+    }
+
     if (loading) {
         return (
             <div
@@ -105,6 +111,13 @@ const WizardView = ({
                     </p>
                 </div>
             </div>
+
+            <div>
+                <button type="button" onClick={ meow }>
+                    Connect to server.py!
+                </button>
+            </div>
+      
             <Upload
                 file={ file }
                 onUpload={ upload }

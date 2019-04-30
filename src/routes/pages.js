@@ -1,18 +1,18 @@
-import Home from "../components/Pages/Home";
-import CallHistory from "../components/Pages/CallHistory";
+// import Home from "../components/Pages/Home";
+// import CallHistory from "../components/Pages/CallHistory";
 import Wizard from "../components/Pages/Wizard";
 
 const pages = [
-    {
-        path: "/",
-        title: "Dashboard",
-        component: Home
-    },
-    {
-        path: "/history",
-        title: "Call History",
-        component: CallHistory
-    },
+    // {
+    //     path: "/",
+    //     title: "Dashboard",
+    //     component: Home
+    // },
+    // {
+    //     path: "/history",
+    //     title: "Call History",
+    //     component: CallHistory
+    // },
     {
         path: "/wizard",
         title: "Wizard",
