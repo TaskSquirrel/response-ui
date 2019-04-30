@@ -4,21 +4,20 @@ import pandas as pd
 import json
 
 from sklearn.utils import shuffle
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report,confusion_matrix,roc_curve,auc,precision_recall_curve,roc_curve
-import seaborn as sns
-import plotly.graph_objs as go 
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc, precision_recall_curve, roc_curve
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import plotly.graph_objs as go 
 import plotly.plotly as py
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 
 class testScript():
-	##topWriteUps = 0
-
 	def __init__(self):
 		self.dfWriteUps = pd.read_excel("../C4G/drive/C4G Outcomes Counselor Issues Write Ups.xlsx")
-		self.topWriteUps =[]
+		self.topWriteUps = []
 		self.phoneReportNum = self.dfWriteUps[['CallReportNum','PhoneNumberFull']]
 		self.callCounts = []
 		self.top10 = []
@@ -111,6 +110,3 @@ if __name__ == '__main__':
 	ts.call_counts()
 	ts.print_top10()
 	ts.print_anxiety(8453893220)
-
-
-
