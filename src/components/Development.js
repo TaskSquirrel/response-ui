@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import styles from "./Development.module.scss";
+
 const IS_DEV = process.env.NODE_ENV !== "production";
 
 const links = [
@@ -20,7 +22,9 @@ const Development = ({ children }) => {
         return (
             <React.Fragment>
                 { children }
-                <div>
+                <div
+                    className={ styles.development }
+                >
                     { links.map(({ to, title }) => (
                         <Link
                             key={ to }
