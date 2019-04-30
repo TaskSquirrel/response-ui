@@ -18,7 +18,6 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "electron": "^4.1.4",
     "electron-store": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -63,13 +62,25 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
+  "devDependencies": {
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0"
+  },
   "main": "./public/native.js",
+  "homepage": "./",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "app": "NODE_ENV=production electron ./build/native.js",
-    "app-dev": "concurrently \"NODE_ENV=development npm run start\" \"wait-on http://localhost:3000 && electron .\""
+    "app-dev": "concurrently \"NODE_ENV=development npm run start\" \"wait-on http://localhost:3000 && electron .\"",
+    "pack": "electron-builder"
+  },
+  "build": {
+    "appId": "org.responsecrisiscenter.history.analyzer",
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "browserslist": [
     ">0.2%",
@@ -126,8 +137,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "devDependencies": {
-    "electron-builder": "^20.39.0"
   }
 }
