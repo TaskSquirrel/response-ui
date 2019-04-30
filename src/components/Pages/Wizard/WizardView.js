@@ -111,13 +111,11 @@ const WizardView = ({
                     </p>
                 </div>
             </div>
-
             <div>
                 <button type="button" onClick={ meow }>
                     Connect to server.py!
                 </button>
             </div>
-      
             <Upload
                 file={ file }
                 onUpload={ upload }
