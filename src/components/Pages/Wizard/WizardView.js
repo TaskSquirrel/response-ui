@@ -1,8 +1,8 @@
 import React from "react";
-import Loader from "react-loader-spinner";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
+import Loading from "../../Layout/Loading";
 import Progress from "./Progress";
 import Upload from "../../Form/Upload";
 import Button from "../../Form/Button";
@@ -62,6 +62,18 @@ const WizardView = ({
         );
     }
 
+    function renderTimeoutRedo() {
+        const message = "It's taking a little bit longer than usual...";
+
+        return (
+            <div
+                className={ styles.message }
+            >
+                { message }
+            </div>
+        );
+    }
+
     function meow() {
         ipcRenderer.send("echo");
     }
@@ -71,9 +83,8 @@ const WizardView = ({
             <div
                 className={ styles.loader }
             >
-                <Loader
-                    type="ThreeDots"
-                    color="#000000"
+                <Loading
+                    timeoutRender={ renderTimeoutRedo }
                 />
             </div>
         );
