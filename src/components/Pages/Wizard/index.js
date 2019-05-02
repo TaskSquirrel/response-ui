@@ -56,15 +56,9 @@ const Wizard = () => {
     function done() {
         setLoading(true);
 
-        files.forEach(({ file }) => {
-            const read = new FileReader();
+        const filePaths = files.map(({ file: { path } }) => path);
 
-            read.addEventListener("load", () => {
-                console.log(read.result);
-            });
-
-            read.readAsDataURL(file);
-        });
+        console.log(filePaths);
     }
 
     function renderWizardView() {
