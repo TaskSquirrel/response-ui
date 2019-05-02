@@ -1,0 +1,17 @@
+.loading {
+    position: relative;
+
+    width: 100%;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+}
+
+.timeout {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2rem;
+}
