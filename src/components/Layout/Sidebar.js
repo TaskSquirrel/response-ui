@@ -17,9 +17,7 @@ const Sidebar = ({
     >
         <div
             className={ styles.corner }
-        >
-            Corner
-        </div>
+        />
         <nav
             className={ styles.navigation }
         >
@@ -31,7 +29,7 @@ const Sidebar = ({
                         path,
                         title,
                         exact,
-                        icon
+                        icon: Icon
                     }) => (
                         <MatchesPath
                             key={ path }
@@ -60,10 +58,12 @@ const Sidebar = ({
                                             className={ styles.icon }
                                         >
                                             {
-                                                icon && (
-                                                    <img
-                                                        src={ icon }
-                                                        alt={ title }
+                                                Icon && (
+                                                    <Icon
+                                                        className={ classNames(
+                                                            styles.svg,
+                                                            matches && styles.selected
+                                                        ) }
                                                     />
                                                 )
                                             }
