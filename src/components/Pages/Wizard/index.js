@@ -80,7 +80,6 @@ const Wizard = () => {
                 upload={ uploadFile }
                 prev={ prev }
                 next={ next }
-                done={ done }
             />
         );
     }

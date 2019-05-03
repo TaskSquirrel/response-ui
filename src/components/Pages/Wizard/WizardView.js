@@ -21,17 +21,8 @@ const WizardView = ({
     nextable,
     upload,
     prev,
-    next,
-    done
+    next
 }) => {
-    function nextAction() {
-        if (!nextable) {
-            done();
-        } else {
-            next();
-        }
-    }
-
     function renderNavigationButtons(enabled) {
         return (
             <div
@@ -48,13 +39,9 @@ const WizardView = ({
                 </ButtonBase>
                 <Button
                     disabled={ !enabled }
-                    onClick={ nextAction }
+                    onClick={ next }
                 >
-                    {
-                        nextable
-                            ? "Next"
-                            : "Start analysis"
-                    }
+                    Next
                 </Button>
             </div>
         );
@@ -126,7 +113,7 @@ const WizardView = ({
                 file={ file }
                 onUpload={ upload }
             />
-            { renderNavigationButtons(file) }
+            { renderNavigationButtons(nextable && file) }
         </React.Fragment>
     );
 };
@@ -141,8 +128,7 @@ WizardView.propTypes = {
     nextable: PropTypes.bool.isRequired,
     upload: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
-    next: PropTypes.func.isRequired,
-    done: PropTypes.func.isRequired
+    next: PropTypes.func.isRequired
 };
 
 WizardView.defaultProps = {
