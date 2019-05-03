@@ -49,6 +49,18 @@ const Upload = ({
         uploadFiles(files);
     }
 
+    function createHoverHandler(setTo) {
+        return ({
+            dataTransfer: { types }
+        }) => {
+            if (!types.find(type => type === "Files")) {
+                return;
+            }
+
+            setHovering(setTo);
+        };
+    }
+
     function handleDrop(e) {
         e.preventDefault();
         setHovering(false);
@@ -66,8 +78,8 @@ const Upload = ({
                     styles.file
                 ) }
                 onChange={ handleFileUpload }
-                onDragOver={ () => setHovering(true) }
-                onDragLeave={ () => setHovering(false) }
+                onDragOver={ createHoverHandler(true) }
+                onDragLeave={ createHoverHandler(false) }
                 onDrop={ handleDrop }
             />
             <div
