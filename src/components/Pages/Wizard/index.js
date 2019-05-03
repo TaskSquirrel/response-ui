@@ -12,29 +12,12 @@ const Wizard = () => {
     const [step, setStep] = useState(0);
     const [files, setFiles] = useState([]);
 
-    const { id, title, subtitle } = wizardSlides[step];
     const prevable = step > 0;
-    const nextable = step < wizardSlides.length - 1;
-    const currentFile = files.find(({ id: fileID }) => id === fileID);
+    const nextable = step < wizardSlides.length;
+    const reachedEnd = step === wizardSlides.length;
 
     function calculatePercentage() {
         return step / wizardSlides.length;
-    }
-
-    function addFile(setID, file) {
-        const nextFiles = [
-            ...files.filter(({ id: fileID }) => setID !== fileID),
-            {
-                id,
-                file
-            }
-        ];
-
-        setFiles(nextFiles);
-    }
-
-    function uploadFile(file) {
-        addFile(id, file);
     }
 
     function prev() {
@@ -62,6 +45,25 @@ const Wizard = () => {
     }
 
     function renderWizardView() {
+        const { id, title, subtitle } = wizardSlides[step];
+        const currentFile = files.find(({ id: fileID }) => id === fileID);
+
+        function addFile(setID, file) {
+            const nextFiles = [
+                ...files.filter(({ id: fileID }) => setID !== fileID),
+                {
+                    id,
+                    file
+                }
+            ];
+
+            setFiles(nextFiles);
+        }
+
+        function uploadFile(file) {
+            addFile(id, file);
+        }
+
         return (
             <WizardView
                 loading={ loading }
@@ -83,20 +85,28 @@ const Wizard = () => {
         );
     }
 
+    function renderWizardContents() {
+        if (!started) {
+            return (
+                <Landing
+                    start={ () => setStarted(true) }
+                />
+            );
+        }
+
+        if (reachedEnd) {
+            return "You reached the end";
+        }
+
+        return renderWizardView();
+    }
+
     return (
         <WizardViewWrapper
             percent={ calculatePercentage() }
             showProgress={ started }
         >
-            {
-                started
-                    ? renderWizardView()
-                    : (
-                        <Landing
-                            start={ () => setStarted(true) }
-                        />
-                    )
-            }
+            { renderWizardContents() }
         </WizardViewWrapper>
     );
 };
