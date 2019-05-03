@@ -18,7 +18,7 @@ const Wizard = () => {
     const currentFile = files.find(({ id: fileID }) => id === fileID);
 
     function calculatePercentage() {
-        return (step + 1) / wizardSlides.length;
+        return step / wizardSlides.length;
     }
 
     function addFile(setID, file) {
@@ -66,7 +66,6 @@ const Wizard = () => {
             <WizardView
                 loading={ loading }
                 step={ step + 1 }
-                percentage={ calculatePercentage() }
                 title={ title }
                 subtitle={ subtitle }
                 file={
@@ -85,7 +84,10 @@ const Wizard = () => {
     }
 
     return (
-        <WizardViewWrapper>
+        <WizardViewWrapper
+            percent={ calculatePercentage() }
+            showProgress={ started }
+        >
             {
                 started
                     ? renderWizardView()
