@@ -1,0 +1,32 @@
+.results {
+}
+
+.list {
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 2rem;
+
+    margin: 2rem 0;
+}
+
+.heading {
+    color: var(--primary);
+}
+
+.buttons {
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 1rem;
+}
+
+.start {
+    width: 100%;
+}
+
+.prev {
+    color: var(--gray);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
