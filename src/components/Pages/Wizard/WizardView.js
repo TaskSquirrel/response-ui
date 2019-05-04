@@ -59,10 +59,6 @@ const WizardView = ({
         );
     }
 
-    function meow() {
-        ipcRenderer.send("echo");
-    }
-
     if (loading) {
         return (
             <div
@@ -103,11 +99,6 @@ const WizardView = ({
                         { subtitle }
                     </p>
                 </div>
-            </div>
-            <div>
-                <button type="button" onClick={ meow }>
-                    Connect to server.py!
-                </button>
             </div>
             <Upload
                 file={ file }
