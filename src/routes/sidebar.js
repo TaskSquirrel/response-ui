@@ -1,23 +1,23 @@
-import dashboardIcon from "../assets/dashboard.svg";
-import callHistoryIcon from "../assets/phone.svg";
-import reportsIcon from "../assets/waves.svg";
+import Dashboard from "../components/SVG/Dashboard";
+import Phone from "../components/SVG/Phone";
+import Waves from "../components/SVG/Waves";
 
 const sidebar = [
     {
         path: "/",
         title: "Dashboard",
         exact: true,
-        icon: dashboardIcon
+        icon: Dashboard
     },
     {
         path: "/history",
         title: "Call History",
-        icon: callHistoryIcon
+        icon: Phone
     },
     {
         path: "/reports",
         title: "Link 3",
-        icon: reportsIcon
+        icon: Waves
     },
     {
         path: "/link-4",
