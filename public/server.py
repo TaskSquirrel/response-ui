@@ -18,6 +18,7 @@ def main():
     srvr.run()
 
     gevent.signal(signal.SIGTERM, srvr.stop)
+    gevent.signal(signal.SIGKILL, srvr.stop)
     print('Zerorpc stopped!')
 
 if __name__ == '__main__':

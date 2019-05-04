@@ -1,7 +1,7 @@
 const path = require("path");
 const url = require("url");
 const zerorpc = require("zerorpc");
-const { spawn } = require("child_process");
+const { spawn, execFile } = require("child_process");
 const {
     app,
     ipcMain,
@@ -11,13 +11,14 @@ const {
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 const { ELECTRON_WEB_URL } = process.env;
-const port = 6111;
+const port = "6111";
 let serv = null;
 
 const connect = () => {
-    const api = path.join(__dirname, "server.py");
-
-    serv = spawn("python3", [api, port]);
+    // const api = path.join(__dirname, "server.py");
+    // serv = spawn("python3", [api, port]);
+    const api = path.join(__dirname, "server");
+    serv = execFile(api, [port]);
 };
 
 const exit = () => {
