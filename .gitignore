@@ -28,3 +28,6 @@ yarn-error.log*
 # server shenanigans
 public/__pycache__/
 public/server
+
+# Jupyter Notebook
+.ipynb_checkpoints/
