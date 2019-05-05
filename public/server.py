@@ -58,7 +58,7 @@ class ResponseApi():
     def person(self, phonenumber):
         reportSet = self.getreport(phonenumber)
         self.addanxiety(reportSet)
-        return self.json(reportSet.head(2))
+        return self.json(reportSet)
 
     def rankanxiety(self, level):
         if 'None' in level:
