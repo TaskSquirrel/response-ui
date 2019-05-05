@@ -5,17 +5,9 @@ import zerorpc, gevent
 # Analytics-related dependencies
 import numpy as np
 import pandas as pd
+
+# For exporting
 import json
-
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mtick
-
-from sklearn.metrics import classification_report,confusion_matrix
-import seaborn as sns
-
-import plotly.graph_objs as go 
-import plotly.plotly as py
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 class ResponseApi():
     # base initialization of instance variables
@@ -41,6 +33,8 @@ class ResponseApi():
         # Parth: "breaks if phone numbers come into the list of 'non-null' columns"
         self.callers = pd.DataFrame(self.writeups[self.writeups['PhoneNumberFull'] != 0])
         self.callers = pd.DataFrame(self.callers['PhoneNumberFull'].value_counts())
+
+        return 'Initial analysis complete!'
 
     # Sample output:
     # {"0":{"index":8453893220,"PhoneNumberFull":746},
@@ -115,7 +109,7 @@ def main():
     port = 6111
     addr = 'tcp://127.0.0.1:' + str(port)
 
-    srvr = zerorpc.Server(ResponseApi())
+    srvr = zerorpc.Server(ResponseApi(), heartbeat=1)
     srvr.bind(addr)
     print('Server running on {}...'.format(addr))
     srvr.run()
