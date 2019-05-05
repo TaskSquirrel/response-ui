@@ -91,7 +91,8 @@ function start() {
     });
 
     ipcMain.on("topcallers", (event, data) => {
-        client.invoke("topcallers", 5, (error, res) => {
+        // 1, 5 are start, end for pagination
+        client.invoke("topcallers", 1, 5, (error, res) => {
             if (error) {
                 console.error(error);
             } else {

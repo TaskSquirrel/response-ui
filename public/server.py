@@ -39,8 +39,9 @@ class ResponseApi():
     # Sample output:
     # {"0":{"index":8453893220,"PhoneNumberFull":746},
     # "1":{"index":6315866348,"PhoneNumberFull":733}}
-    def topcallers(self, amount=10):
-        topcallers = self.callers.reset_index()[:amount]
+    def topcallers(self, start=0, amount=10):
+        end = start + amount
+        topcallers = self.callers.reset_index()[start:end]
         return self.json(topcallers)
 
     def getreport(self, phonenumber):
