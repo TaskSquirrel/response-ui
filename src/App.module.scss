@@ -6,7 +6,7 @@
 }
 
 html {
-    font-family: "Work Sans", system-ui;
+    font-family: var(--font);
 }
 
 body {
@@ -15,5 +15,10 @@ body {
 
 a,
 a:link {
+    color: var(--primary);
     text-decoration: none;
+
+    &:hover {
+        color: var(--primary-lighter);
+    }
 }

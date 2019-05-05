@@ -22,9 +22,7 @@ const Skeleton = ({
             className={ styles.right }
         >
             <Header />
-            <main
-                className={ styles.content }
-            >
+            <main>
                 { children }
             </main>
         </div>
