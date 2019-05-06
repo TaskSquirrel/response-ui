@@ -23,6 +23,7 @@ const InfoCard = ({
                     unit
                 }) => (
                     <InfoCardItem
+                        key={ title }
                         title={ title }
                         value={ value }
                         unit={ unit }

@@ -21,26 +21,24 @@ const Section = ({
 }) => React.createElement(
     component,
     { className },
-    [
-        React.createElement(
-            HEADING_SIZES[headingSize],
-            {
-                className: classNames(
-                    styles.heading,
-                    headingClassName
-                )
-            },
-            heading
-        ),
-        <div
-            className={ classNames(
-                styles.content,
-                contentClassName
-            ) }
-        >
-            { children }
-        </div>
-    ]
+    React.createElement(
+        HEADING_SIZES[headingSize],
+        {
+            className: classNames(
+                styles.heading,
+                headingClassName
+            )
+        },
+        heading
+    ),
+    <div
+        className={ classNames(
+            styles.content,
+            contentClassName
+        ) }
+    >
+        { children }
+    </div>
 );
 
 Section.HEADING_SIZES = HEADING_SIZES;
