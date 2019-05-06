@@ -1,5 +1,7 @@
 @import "../../styles/breakpoints";
 
+$resize-at: $xl;
+
 $sidebar-top-padding: 10vh;
 $sidebar-height: 100vh;
 
@@ -22,7 +24,7 @@ $expanded-color: rgba(0, 0, 0, 0.6);
         color 250ms ease-in-out,
         background-color 250ms ease-in-out;
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         min-width: 15%;
 
         background-color: var(--white);
@@ -76,7 +78,7 @@ $expanded-color: rgba(0, 0, 0, 0.6);
 
     font-weight: bold;
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         display: grid;
         grid-template-columns: 30px 1fr;
         grid-column-gap: 0.2rem;
@@ -101,7 +103,7 @@ $expanded-color: rgba(0, 0, 0, 0.6);
         opacity: 1;
     }
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         &.selected {
             visibility: hidden;
         }
@@ -121,7 +123,7 @@ $expanded-color: rgba(0, 0, 0, 0.6);
         fill: #ffffff;
     }
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         fill: $expanded-color;
 
         &.selected {
@@ -136,7 +138,7 @@ $expanded-color: rgba(0, 0, 0, 0.6);
 
     color: var(--gray);
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         position: relative;
         visibility: visible;
     }
