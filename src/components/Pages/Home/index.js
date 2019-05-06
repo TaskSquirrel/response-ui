@@ -1,10 +1,10 @@
 import React from "react";
 
 import withSkeleton from "../../Layout/withSkeleton";
+import TopCallers from "./TopCallers";
 import Section from "../../UI/Section";
 import InfoCard from "../../UI/InfoCard";
 import ActionCard from "../../UI/ActionCard";
-import DetailCard from "../../UI/DetailCard";
 
 import styles from "./Dashboard.module.scss";
 
@@ -23,6 +23,7 @@ const Home = () => {
             link: "/"
         }
     ];
+
     const stats = [
         {
             title: "Total Calls",
@@ -73,29 +74,14 @@ const Home = () => {
                 heading="Data"
                 contentClassName={ styles.numbers }
             >
-                <Section
-                    component="div"
-                    heading="Phone numbers"
-                    headingSize="small"
-                    contentClassName={ styles.content }
-                >
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                </Section>
+                <TopCallers />
                 <Section
                     component="div"
                     heading="Call Reports"
                     headingSize="small"
                     contentClassName={ styles.content }
                 >
-                    <DetailCard active />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
+                    Failed to load module!
                 </Section>
             </Section>
         </div>
