@@ -10,8 +10,8 @@ const sidebar = [
         icon: Dashboard
     },
     {
-        path: "/history",
-        title: "Call History",
+        path: "/numbers",
+        title: "Phone Numbers",
         icon: Phone
     },
     {

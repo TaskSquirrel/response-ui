@@ -1,6 +1,8 @@
 import Home from "../components/Pages/Home";
 import CallHistory from "../components/Pages/CallHistory";
 import Wizard from "../components/Pages/Wizard";
+import Numbers from "../components/Pages/Numbers";
+import ViewNumber from "../components/Pages/Numbers/ViewNumber";
 
 const pages = [
     {
@@ -20,8 +22,16 @@ const pages = [
         component: Wizard
     },
     {
-        path: "/reports",
-        title: "Link 3"
+        path: "/numbers",
+        exact: true,
+        title: "Phone Numbers",
+        component: Numbers
+    },
+    {
+        path: "/numbers/:num",
+        exact: true,
+        title: "View Phone Number",
+        component: ViewNumber
     },
     {
         path: "/link-4",
