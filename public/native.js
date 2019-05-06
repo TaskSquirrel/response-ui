@@ -17,7 +17,7 @@ let serv = null;
 const connect = () => {
     const api = path.join(__dirname, "server.py");
 
-    serv = spawn("python3", [api, port]);
+    serv = spawn("python", [api, port]);
 };
 
 const exit = () => {
@@ -26,8 +26,8 @@ const exit = () => {
 
 function createLoadingScreen() {
     const loading = new BrowserWindow({
-        width: 400,
-        height: 300,
+        width: 200,
+        height: 100,
         frame: false
     });
 
