@@ -1,7 +1,7 @@
 const path = require("path");
 const url = require("url");
 const zerorpc = require("zerorpc");
-const { spawn, execFile } = require("child_process");
+const { execFile } = require("child_process");
 const {
     app,
     ipcMain,
@@ -79,9 +79,15 @@ function start() {
 
     // for Ben: Hard-coded data for now -- use data to pass in what you need
     ipcMain.on("upload", (event, data) => {
+        console.log("Received: ", data);
+
+        if (!data) {
+            return;
+        }
+
         client = new zerorpc.Client({ heartbeatInterval: 50000, timeout: 50 });
         client.connect("tcp://127.0.0.1:6111");
-        client.invoke("start", "/Users/Zen/Desktop/390/data/Write-ups.xlsx", (error, res) => {
+        client.invoke("start", data, (error, res) => {
             if (error) {
                 console.log(error);
             } else {
@@ -92,11 +98,12 @@ function start() {
 
     ipcMain.on("topcallers", (event, data) => {
         // 1, 5 are start, end for pagination
-        client.invoke("topcallers", 1, 5, (error, res) => {
+        client.invoke("topcallers", 0, 5, (error, res) => {
             if (error) {
                 console.error(error);
             } else {
-                console.log(res);
+                console.log("topcallers dispatched response!");
+                event.sender.send("topcallers-reply", res);
             }
         });
     });
