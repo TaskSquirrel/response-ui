@@ -11,7 +11,9 @@ const DetailCard = ({
     active,
     title,
     first,
-    second
+    second,
+    icon,
+    iconClassName
 }) => {
     function renderArrow() {
         if (!active) {
@@ -36,8 +38,13 @@ const DetailCard = ({
                 className={ styles.inner }
             >
                 <div
-                    className={ styles.icon }
-                />
+                    className={ classNames(
+                        styles.icon,
+                        iconClassName
+                    ) }
+                >
+                    { icon && icon() }
+                </div>
                 <div
                     className={ styles.info }
                 >
@@ -65,16 +72,23 @@ const DetailCard = ({
 
 DetailCard.propTypes = {
     active: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
     first: PropTypes.string,
-    second: PropTypes.string
+    second: PropTypes.string,
+    icon: PropTypes.func,
+    iconClassName: PropTypes.string
 };
 
 DetailCard.defaultProps = {
     active: false,
     title: "Title",
-    first: "Detail 1",
-    second: "Detail 2"
+    first: null,
+    second: null,
+    icon: null,
+    iconClassName: null
 };
 
 export default DetailCard;

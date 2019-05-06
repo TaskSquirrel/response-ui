@@ -21,6 +21,10 @@
 }
 
 .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: var(--primary-lighter);
 
     width: 3.5rem;
