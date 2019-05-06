@@ -1,5 +1,5 @@
 # Dependencies to maintain webserver
-import signal
+import signal, random
 import zerorpc, gevent
 
 # Analytics-related dependencies
@@ -35,6 +35,15 @@ class ResponseApi():
         self.callers = pd.DataFrame(self.callers['PhoneNumberFull'].value_counts())
 
         return 'Initial analysis complete!'
+
+    def randcallers(self, amount=5):
+        length = len(self.callers)
+        nums = random.sample(range(length), amount)
+
+        rcallers = []
+        for num in nums:
+            rcallers.append(self.json(self.callers.reset_index()[num]))
+        return rcallers
 
     # Sample output:
     # {"0":{"index":8453893220,"PhoneNumberFull":746},
