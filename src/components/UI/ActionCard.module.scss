@@ -3,8 +3,8 @@
     flex-direction: column;
 
     transition:
-        box-shadow 200ms ease-in-out,
-        transform 200ms ease-in-out;
+        box-shadow 100ms ease-in-out,
+        transform 100ms ease-in-out;
 
     &:hover {
         box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);

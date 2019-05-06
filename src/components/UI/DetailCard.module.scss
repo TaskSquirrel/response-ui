@@ -1,0 +1,54 @@
+.card {
+    transition:
+        transform 100ms ease-in-out,
+        box-shadow 100ms ease-in-out;
+
+    &.active {
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+            transform: scale(1.05);
+        }
+    }
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
+}
+
+.icon {
+    background-color: var(--primary-lighter);
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    margin-right: 1rem;
+}
+
+.info {
+    flex: 1;
+
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 0.1rem;
+
+    font-size: 0.9rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.first,
+.second {
+    color: var(--gray);
+}
+
+.right {
+    fill: var(--gray);
+}
