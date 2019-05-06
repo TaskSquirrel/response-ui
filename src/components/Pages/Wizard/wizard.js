@@ -1,18 +1,20 @@
+const format = "In Excel (.xsls) or CSV (.csv) format.";
+
 const wizard = [
     {
         id: "write-ups",
         title: "Add your write-ups file",
-        subtitle: "The file needs to be in CSV format."
+        subtitle: format
     },
     {
         id: "linked",
         title: "Add your linked-together file",
-        subtitle: "Also in CSV format."
+        subtitle: format
     },
     {
         id: "custom-fields",
         title: "Add your custom-fields file",
-        subtitle: "In CSV format!"
+        subtitle: format
     }
 ];
 

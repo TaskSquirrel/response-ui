@@ -9,8 +9,6 @@ import ButtonBase from "../../Form/ButtonBase";
 
 import styles from "./Wizard.module.scss";
 
-const { ipcRenderer } = window.require("electron");
-
 const WizardView = ({
     loading,
     step,
