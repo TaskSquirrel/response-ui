@@ -29,9 +29,9 @@ const DetailCard = ({
 
     return (
         <CardBase
+            active={ active }
             className={ classNames(
-                styles.card,
-                active && styles.active
+                styles.card
             ) }
         >
             <div

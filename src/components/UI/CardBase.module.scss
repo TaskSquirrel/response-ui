@@ -3,4 +3,17 @@
     border-radius: 10px;
 
     background-color: var(--white);
+
+    transition:
+        transform 100ms ease-in-out,
+        box-shadow 100ms ease-in-out;
+
+    &.active {
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+            transform: scale(1.05);
+        }
+    }
 }
