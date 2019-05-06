@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Landing from "./Landing";
 import WizardViewWrapper from "./WizardViewWrapper";
 import WizardView from "./WizardView";
+import Results from "./Results";
 
 import wizardSlides from "./wizard";
 
@@ -94,7 +95,13 @@ const Wizard = () => {
         }
 
         if (reachedEnd) {
-            return "You reached the end";
+            return (
+                <Results
+                    files={ files }
+                    done={ done }
+                    prev={ prev }
+                />
+            );
         }
 
         return renderWizardView();
