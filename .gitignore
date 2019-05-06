@@ -24,3 +24,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# server shenanigans
+public/__pycache__/
+public/server
+
+# Jupyter Notebook
+.ipynb_checkpoints/

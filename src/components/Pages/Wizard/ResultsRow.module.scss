@@ -1,0 +1,17 @@
+.row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.filename {
+    color: var(--gray);
+    font-family: "SF Mono", monospace;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.size {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

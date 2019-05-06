@@ -1,7 +1,7 @@
 const path = require("path");
 const url = require("url");
 const zerorpc = require("zerorpc");
-const { spawn } = require("child_process");
+const { spawn, execFile } = require("child_process");
 const {
     app,
     ipcMain,
@@ -11,13 +11,15 @@ const {
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 const { ELECTRON_WEB_URL } = process.env;
-const port = 6111;
+const port = "6111";
 let serv = null;
+let client = null;
 
 const connect = () => {
-    const api = path.join(__dirname, "server.py");
-
-    serv = spawn("python", [api, port]);
+    // const api = path.join(__dirname, "server.py");
+    // serv = spawn("python3", [api, port]);
+    const api = path.join(__dirname, "server");
+    serv = execFile(api, [port]);
 };
 
 const exit = () => {
@@ -74,11 +76,33 @@ function start() {
         notif.show();
     });
 
-    ipcMain.on("echo", (event, data) => {
-        const client = new zerorpc.Client();
 
+    // for Ben: Hard-coded data for now -- use data to pass in what you need
+    ipcMain.on("upload", (event, data) => {
+        client = new zerorpc.Client({ heartbeatInterval: 50000, timeout: 50 });
         client.connect("tcp://127.0.0.1:6111");
-        client.invoke("echo", (error, res) => {
+        client.invoke("start", "/Users/Zen/Desktop/390/data/Write-ups.xlsx", (error, res) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(res);
+            }
+        });
+    });
+
+    ipcMain.on("topcallers", (event, data) => {
+        // 1, 5 are start, end for pagination
+        client.invoke("topcallers", 1, 5, (error, res) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log(res);
+            }
+        });
+    });
+
+    ipcMain.on("person", (event, data) => {
+        client.invoke("person", 8453893220, (error, res) => {
             if (error) {
                 console.error(error);
             } else {

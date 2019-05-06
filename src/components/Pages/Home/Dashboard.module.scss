@@ -1,0 +1,59 @@
+.dashboard {
+    padding: 2rem;
+}
+
+.grid {
+    $spacing: 1rem;
+
+    grid-row-gap: $spacing;
+    grid-column-gap: $spacing;
+}
+
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "metrics chart chart actions";
+
+    @extend .grid;
+}
+
+.stats {
+    align-self: start;
+}
+
+.second {
+    grid-area: chart;
+}
+
+.actions {
+    grid-area: actions;
+
+    display: flex;
+    flex-direction: column;
+
+    & > div,
+    & > a > div {
+        min-height: 6rem;
+        margin-bottom: 1rem;
+    }
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.content {
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 0.5rem;
+}
+
+.numbers {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+
+    @extend .grid;
+}

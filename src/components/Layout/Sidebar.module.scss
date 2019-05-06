@@ -1,18 +1,22 @@
 @import "../../styles/breakpoints";
 
+$resize-at: $xl;
+
 $sidebar-top-padding: 10vh;
 $sidebar-height: 100vh;
+
+$expanded-color: rgba(0, 0, 0, 0.6);
 
 .sidebar {
     position: sticky;
     top: 0;
 
     width: 100px;
-    min-width: 60px;
-    max-width: 10%;
+    min-width: 70px;
+    max-width: 70px;
     height: $sidebar-height;
 
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--primary);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 
     transition:
@@ -20,7 +24,7 @@ $sidebar-height: 100vh;
         color 250ms ease-in-out,
         background-color 250ms ease-in-out;
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         min-width: 15%;
 
         background-color: var(--white);
@@ -72,10 +76,9 @@ $sidebar-height: 100vh;
     width: 100%;
     height: 100%;
 
-    color: rgba(0, 0, 0, 0.6);
     font-weight: bold;
 
-    @media (min-width: $lg) {
+    @media (min-width: $resize-at) {
         display: grid;
         grid-template-columns: 30px 1fr;
         grid-column-gap: 0.2rem;
@@ -91,13 +94,19 @@ $sidebar-height: 100vh;
     width: 3px;
     height: 100%;
 
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #ffffff;
     opacity: 0;
 
     transition: opacity 200ms ease-out;
 
     &.selected {
         opacity: 1;
+    }
+
+    @media (min-width: $resize-at) {
+        &.selected {
+            visibility: hidden;
+        }
     }
 }
 
@@ -107,11 +116,29 @@ $sidebar-height: 100vh;
     align-items: center;
 }
 
+.svg {
+    fill: rgba(255, 255, 255, 0.7);
+
+    &.selected {
+        fill: #ffffff;
+    }
+
+    @media (min-width: $resize-at) {
+        fill: $expanded-color;
+
+        &.selected {
+            fill: $expanded-color;
+        }
+    }
+}
+
 .title {
     position: absolute;
     visibility: hidden;
 
-    @media (min-width: $lg) {
+    color: var(--gray);
+
+    @media (min-width: $resize-at) {
         position: relative;
         visibility: visible;
     }

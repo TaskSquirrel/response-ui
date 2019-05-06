@@ -3,19 +3,15 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import Loading from "../../Layout/Loading";
-import Progress from "./Progress";
 import Upload from "../../Form/Upload";
 import Button from "../../Form/Button";
 import ButtonBase from "../../Form/ButtonBase";
 
 import styles from "./Wizard.module.scss";
 
-const { ipcRenderer } = window.require("electron");
-
 const WizardView = ({
     loading,
     step,
-    percentage,
     title,
     subtitle,
     file,
@@ -23,17 +19,8 @@ const WizardView = ({
     nextable,
     upload,
     prev,
-    next,
-    done
+    next
 }) => {
-    function nextAction() {
-        if (!nextable) {
-            done();
-        } else {
-            next();
-        }
-    }
-
     function renderNavigationButtons(enabled) {
         return (
             <div
@@ -50,13 +37,9 @@ const WizardView = ({
                 </ButtonBase>
                 <Button
                     disabled={ !enabled }
-                    onClick={ nextAction }
+                    onClick={ next }
                 >
-                    {
-                        nextable
-                            ? "Next"
-                            : "Start analysis"
-                    }
+                    Next
                 </Button>
             </div>
         );
@@ -74,10 +57,6 @@ const WizardView = ({
         );
     }
 
-    function meow() {
-        ipcRenderer.send("echo");
-    }
-
     if (loading) {
         return (
             <div
@@ -92,9 +71,6 @@ const WizardView = ({
 
     return (
         <React.Fragment>
-            <Progress
-                percent={ percentage }
-            />
             <div
                 className={ styles["heading-container"] }
             >
@@ -122,16 +98,11 @@ const WizardView = ({
                     </p>
                 </div>
             </div>
-            <div>
-                <button type="button" onClick={ meow }>
-                    Connect to server.py!
-                </button>
-            </div>
             <Upload
                 file={ file }
                 onUpload={ upload }
             />
-            { renderNavigationButtons(file) }
+            { renderNavigationButtons(nextable && file) }
         </React.Fragment>
     );
 };
@@ -139,7 +110,6 @@ const WizardView = ({
 WizardView.propTypes = {
     loading: PropTypes.bool.isRequired,
     step: PropTypes.number.isRequired,
-    percentage: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
     file: PropTypes.instanceOf(File),
@@ -147,8 +117,7 @@ WizardView.propTypes = {
     nextable: PropTypes.bool.isRequired,
     upload: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
-    next: PropTypes.func.isRequired,
-    done: PropTypes.func.isRequired
+    next: PropTypes.func.isRequired
 };
 
 WizardView.defaultProps = {
