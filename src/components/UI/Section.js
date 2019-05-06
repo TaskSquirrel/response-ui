@@ -4,24 +4,34 @@ import PropTypes from "prop-types";
 
 import styles from "./Section.module.scss";
 
+const HEADING_SIZES = {
+    small: "h3",
+    medium: "h2",
+    large: "h1"
+};
+
 const Section = ({
     children,
+    component,
     heading,
+    headingSize,
     className,
     headingClassName,
     contentClassName
-}) => (
-    <section
-        className={ className }
-    >
-        <h1
-            className={ classNames(
-                styles.heading,
-                headingClassName
-            ) }
-        >
-            { heading }
-        </h1>
+}) => React.createElement(
+    component,
+    { className },
+    [
+        React.createElement(
+            HEADING_SIZES[headingSize],
+            {
+                className: classNames(
+                    styles.heading,
+                    headingClassName
+                )
+            },
+            heading
+        ),
         <div
             className={ classNames(
                 styles.content,
@@ -30,22 +40,35 @@ const Section = ({
         >
             { children }
         </div>
-    </section>
+    ]
 );
+
+Section.HEADING_SIZES = HEADING_SIZES;
 
 Section.propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
+    component: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.func
+    ]),
     headingClassName: PropTypes.string,
     contentClassName: PropTypes.string,
-    heading: PropTypes.string
+    heading: PropTypes.string,
+    headingSize: PropTypes.oneOf([
+        "small",
+        "medium",
+        "large"
+    ])
 };
 
 Section.defaultProps = {
     className: null,
+    component: "section",
     headingClassName: null,
     contentClassName: null,
-    heading: ""
+    heading: "",
+    headingSize: "large"
 };
 
 export default Section;
