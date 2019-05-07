@@ -64,7 +64,15 @@ function getTopCallers() {
         .catch(e => console.error(e));
 }
 
+function getRandomNumbers(count = 100) {
+    return promisify("random-numbers", count)
+        .then(str => JSON.parse(str))
+        .then(data => data);
+}
+
 function getPhoneNumberData(number) {
+    const now = Date.now();
+
     return promisify("person", number)
         .then(str => JSON.parse(str))
         .then(data => {
@@ -98,6 +106,7 @@ function getPhoneNumberData(number) {
                     startEmotion: entry.startEmotion,
                     averageEmotion: entry.avgEmotion,
                     endEmotion: entry.endEmotion,
+                    timeSince: now - entry[dateLabel]
                 };
             });
 
@@ -109,5 +118,6 @@ export {
     request,
     promisify,
     getTopCallers,
+    getRandomNumbers,
     getPhoneNumberData
 };

@@ -11,7 +11,9 @@ const ReportCard = ({
     reportNumber,
     date,
     type,
-    length
+    length,
+    startEmotion,
+    endEmotion
 }) => {
     function toDate(millis) {
         const obj = new Date(millis);
@@ -54,10 +56,22 @@ const ReportCard = ({
                     >
                         { reportNumber }
                     </div>
-                    <MetricLabel
-                        value={ length }
-                        unit="minutes"
-                    />
+                    <div
+                        className={ styles.metrics }
+                    >
+                        <MetricLabel
+                            value={ length }
+                            unit="minutes"
+                        />
+                        <MetricLabel
+                            value={ startEmotion }
+                            unit="start anxiety"
+                        />
+                        <MetricLabel
+                            value={ endEmotion }
+                            unit="end anxiety"
+                        />
+                    </div>
                 </div>
                 <div>
                     { renderBadge() }
@@ -71,7 +85,9 @@ ReportCard.propTypes = {
     reportNumber: PropTypes.number.isRequired,
     date: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
-    length: PropTypes.number.isRequired
+    length: PropTypes.number.isRequired,
+    startEmotion: PropTypes.number.isRequired,
+    endEmotion: PropTypes.number.isRequired
 };
 
 export default ReportCard;
