@@ -12,4 +12,14 @@
 
 .button {
     font-size: 1.2rem;
+
+    margin-bottom: 1rem;
+}
+
+.back {
+    color: var(--gray);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

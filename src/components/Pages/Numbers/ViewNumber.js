@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import ViewNumberView from "./ViewNumberView";
@@ -34,7 +34,21 @@ const ViewNumber = ({ match }) => {
 
     if (!data) {
         return (
-            <Loading />
+            <Loading
+                timeout={ 6000 }
+                timeoutRender={ () => (
+                    <div>
+                        <div>
+                            Oops. Something went wrong!
+                        </div>
+                        <Link
+                            to="/"
+                        >
+                            Go back
+                        </Link>
+                    </div>
+                ) }
+            />
         );
     }
 
