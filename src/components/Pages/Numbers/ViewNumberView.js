@@ -5,6 +5,7 @@ import withSkeleton from "../../Layout/withSkeleton";
 import MetricLabel from "./MetricLabel";
 import ReportCard from "./ReportCard";
 import TextBox from "../../Form/TextBox";
+import Button from "../../Form/Button";
 
 import noop from "../../../utils/noop";
 import phoneNumberize from "../../../utils/phone";
@@ -19,10 +20,23 @@ const ViewNumberView = ({
     emotion,
     reports,
     stringFilter,
-    setStringFilter
+    setStringFilter,
+    filter,
+    setFilter
 }) => {
     function round(n) {
         return Math.round(n * 100) / 100;
+    }
+
+    function createFilterChanger(filterType) {
+        return () => {
+            if (filterType === filter) {
+                // Same filter, so disable it
+                setFilter(null);
+            } else {
+                setFilter(filterType);
+            }
+        };
     }
 
     function renderReports() {
@@ -103,6 +117,36 @@ const ViewNumberView = ({
                             onChange={ ({ target: { value } }) => setStringFilter(value) }
                         />
                     </div>
+                    <div>
+                        <h3>
+                            Filter by time
+                        </h3>
+                        <span>
+                            { filter && `Filtering by ${filter}` }
+                        </span>
+                        <div>
+                            <Button
+                                onClick={ createFilterChanger("ONE_WEEK") }
+                            >
+                                One week
+                            </Button>
+                            <Button
+                                onClick={ createFilterChanger("ONE_MONTH") }
+                            >
+                                One month
+                            </Button>
+                            <Button
+                                onClick={ createFilterChanger("HALF_YEAR") }
+                            >
+                                Half a year
+                            </Button>
+                            <Button
+                                onClick={ createFilterChanger("ONE_YEAR") }
+                            >
+                                One year
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
@@ -116,7 +160,9 @@ ViewNumberView.propTypes = {
     emotion: PropTypes.shape({}).isRequired,
     reports: PropTypes.arrayOf(PropTypes.shape({})),
     stringFilter: PropTypes.string,
-    setStringFilter: PropTypes.func
+    setStringFilter: PropTypes.func,
+    filter: PropTypes.string,
+    setFilter: PropTypes.func
 };
 
 ViewNumberView.defaultProps = {
@@ -124,7 +170,9 @@ ViewNumberView.defaultProps = {
     average: 0,
     reports: [],
     stringFilter: "",
-    setStringFilter: noop
+    setStringFilter: noop,
+    filter: null,
+    setFilter: noop
 };
 
 export default withSkeleton(ViewNumberView);
