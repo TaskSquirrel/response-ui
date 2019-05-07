@@ -20,7 +20,12 @@ const Section = ({
     contentClassName
 }) => React.createElement(
     component,
-    { className },
+    {
+        className: classNames(
+            styles.container,
+            className
+        )
+    },
     React.createElement(
         HEADING_SIZES[headingSize],
         {

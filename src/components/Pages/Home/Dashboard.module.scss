@@ -70,3 +70,10 @@
 .top-callers-icon {
     fill: var(--primary);
 }
+
+.missing {
+    grid-area: chart;
+    align-self: start;
+
+    padding: 1rem;
+}

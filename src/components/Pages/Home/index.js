@@ -11,20 +11,21 @@ import InfoCard from "../../UI/InfoCard";
 import ActionCard from "../../UI/ActionCard";
 
 import styles from "./Dashboard.module.scss";
+import CardBase from "../../UI/CardBase";
 
 const Home = ({ value }) => {
     const actions = [
         {
             title: "Search by phone number",
-            link: "/phone"
+            link: "/numbers"
         },
         {
             title: "View call reports",
             link: "/"
         },
         {
-            title: "Reanalyze",
-            link: "/"
+            title: "Analyze new files",
+            link: "/wizard"
         }
     ];
 
@@ -81,10 +82,11 @@ const Home = ({ value }) => {
                     className={ styles.stats }
                     items={ stats }
                 />
-                <InfoCard
-                    className={ styles.second }
-                    items={ [...stats, { title: "swag", value: 1000 }] }
-                />
+                <CardBase
+                    className={ styles.missing }
+                >
+                    Not implemented yet!
+                </CardBase>
                 <div
                     className={ styles.actions }
                 >
