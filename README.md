@@ -4,7 +4,8 @@ UI for the Computing for Good Outcomes team project for Response of Suffolk Coun
 
 ## Setup
 
-* NodeJS `v10` or greater.
+* NodeJS `v11` or greater.
+  * Executable is built using `v11.4.0`.
 * NPM
 * Python 3.7.x + Gevent, Zerorpc, Numpy, Pandas
 
@@ -14,6 +15,8 @@ UI for the Computing for Good Outcomes team project for Response of Suffolk Coun
 git clone https://github.com/TaskSquirrel/response-ui
 cd response-ui
 npm install
+npm install zeromq
+./node_modules/.bin/electron-rebuild
 npm run app-dev
 ./build.sh
 ```
