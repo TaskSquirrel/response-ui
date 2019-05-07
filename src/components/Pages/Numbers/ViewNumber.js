@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import ViewNumberView from "./ViewNumberView";
@@ -9,6 +9,9 @@ import { getPhoneNumberData } from "../../../api";
 
 const ViewNumber = ({ match }) => {
     const [data, setData] = useState(null);
+    const [startsWith, setStartsWith] = useState("");
+    const [filter, setFilter] = useState(null);
+
     const number = match.params.num;
 
     useEffect(() => {
@@ -20,6 +23,16 @@ const ViewNumber = ({ match }) => {
 
     function calculateAverageCallLength() {
         return data.reduce((accumulator, { length }) => accumulator + length, 0) / data.length;
+    }
+
+    function filterData() {
+        let filtered = data;
+
+        if (startsWith) {
+            filtered = filtered.filter(({ reportNumber: n }) => `${n}`.startsWith(startsWith));
+        }
+
+        return filtered;
     }
 
     function getEmotionData() {
@@ -34,7 +47,21 @@ const ViewNumber = ({ match }) => {
 
     if (!data) {
         return (
-            <Loading />
+            <Loading
+                timeout={ 6000 }
+                timeoutRender={ () => (
+                    <div>
+                        <div>
+                            Oops. Something went wrong!
+                        </div>
+                        <Link
+                            to="/"
+                        >
+                            Go back
+                        </Link>
+                    </div>
+                ) }
+            />
         );
     }
 
@@ -44,7 +71,11 @@ const ViewNumber = ({ match }) => {
             count={ data.length }
             average={ calculateAverageCallLength() }
             emotion={ getEmotionData() }
-            reports={ data }
+            reports={ filterData() }
+            stringFilter={ startsWith }
+            setStringFilter={ setStartsWith }
+            filter={ filter }
+            setFilter={ setFilter }
         />
     );
 };

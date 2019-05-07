@@ -1,7 +1,12 @@
 .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: relative;
 
     width: 100%;
+    height: 100%;
 }
 
 .loader {
@@ -10,8 +15,8 @@
 }
 
 .timeout {
+    text-align: center;
+
     position: absolute;
-    left: 0;
-    right: 0;
     bottom: -2rem;
 }

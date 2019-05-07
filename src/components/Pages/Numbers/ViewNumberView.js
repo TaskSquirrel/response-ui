@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import withSkeleton from "../../Layout/withSkeleton";
 import MetricLabel from "./MetricLabel";
 import ReportCard from "./ReportCard";
+import TextBox from "../../Form/TextBox";
 
+import noop from "../../../utils/noop";
 import phoneNumberize from "../../../utils/phone";
+import toEmotion from "../../../utils/emotion";
 
 import styles from "./Numbers.module.scss";
 
@@ -14,10 +17,37 @@ const ViewNumberView = ({
     count,
     average,
     emotion,
-    reports
+    reports,
+    stringFilter,
+    setStringFilter
 }) => {
     function round(n) {
         return Math.round(n * 100) / 100;
+    }
+
+    function renderReports() {
+        if (!reports || reports.length < 1) {
+            return "No reports found!";
+        }
+
+        return reports.map(({
+            reportNumber,
+            date,
+            type,
+            length,
+            startEmotion,
+            endEmotion
+        }) => (
+            <ReportCard
+                key={ reportNumber }
+                reportNumber={ reportNumber }
+                date={ date }
+                type={ type }
+                length={ length }
+                startEmotion={ startEmotion }
+                endEmotion={ endEmotion }
+            />
+        ));
     }
 
     const startEmotion = emotion.started;
@@ -43,11 +73,11 @@ const ViewNumberView = ({
                         unit="min. average call time"
                     />
                     <MetricLabel
-                        value={ startEmotion || "N/A" }
+                        value={ toEmotion(startEmotion) }
                         unit="starting anxiety"
                     />
                     <MetricLabel
-                        value={ endEmotion || "N/A" }
+                        value={ toEmotion(endEmotion) }
                         unit="ending anxiety"
                     />
                 </div>
@@ -58,25 +88,21 @@ const ViewNumberView = ({
                 <div
                     className={ styles.results }
                 >
-                    {
-                        reports.map(({
-                            reportNumber,
-                            date,
-                            type,
-                            length
-                        }) => (
-                            <ReportCard
-                                key={ reportNumber }
-                                reportNumber={ reportNumber }
-                                date={ date }
-                                type={ type }
-                                length={ length }
-                            />
-                        ))
-                    }
+                    { renderReports() }
                 </div>
-                <div>
-                    Filters
+                <div
+                    className={ styles.filters }
+                >
+                    <div>
+                        <h3>
+                            Filter by call report number
+                        </h3>
+                        <TextBox
+                            className={ styles.textbox }
+                            value={ stringFilter }
+                            onChange={ ({ target: { value } }) => setStringFilter(value) }
+                        />
+                    </div>
                 </div>
             </div>
         </React.Fragment>
@@ -88,13 +114,17 @@ ViewNumberView.propTypes = {
     count: PropTypes.number,
     average: PropTypes.number,
     emotion: PropTypes.shape({}).isRequired,
-    reports: PropTypes.arrayOf(PropTypes.shape({}))
+    reports: PropTypes.arrayOf(PropTypes.shape({})),
+    stringFilter: PropTypes.string,
+    setStringFilter: PropTypes.func
 };
 
 ViewNumberView.defaultProps = {
     count: 0,
     average: 0,
-    reports: []
+    reports: [],
+    stringFilter: "",
+    setStringFilter: noop
 };
 
 export default withSkeleton(ViewNumberView);

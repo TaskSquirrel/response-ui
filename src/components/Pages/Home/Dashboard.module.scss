@@ -63,14 +63,6 @@
     justify-content: center;
 }
 
-.top-callers-icon-container {
-    background-color: rgba(41, 102, 255, 0.4);
-}
-
-.top-callers-icon {
-    fill: var(--primary);
-}
-
 .missing {
     grid-area: chart;
     align-self: start;

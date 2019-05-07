@@ -108,9 +108,11 @@ function start() {
         });
     });
 
-    ipcMain.on("topcallers", event => {
+    ipcMain.on("topcallers", (event, count) => {
+        const fetchAmount = count || 10;
+
         // 1, 5 are start, end for pagination
-        client.invoke("topcallers", 0, 5, (error, res) => {
+        client.invoke("topcallers", 0, fetchAmount, (error, res) => {
             if (error) {
                 console.error(error);
             } else {
@@ -145,7 +147,7 @@ function start() {
             } else {
                 console.log("randcallers dispatched response!");
 
-                event.sender.send(result);
+                event.sender.send("random-numbers-reply", result);
             }
         });
     });

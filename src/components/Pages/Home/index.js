@@ -112,7 +112,7 @@ const Home = ({ value }) => {
                     headingSize="small"
                     contentClassName={ styles.content }
                 >
-                    Failed to load module!
+                    Module not yet implemented.
                 </Section>
             </Section>
         </div>

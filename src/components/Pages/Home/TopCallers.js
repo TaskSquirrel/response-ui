@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import Section from "../../UI/Section";
-import DetailCard from "../../UI/DetailCard";
+import NumberCard from "../Numbers/NumberCard";
 import Spinner from "./Spinner";
-import Phone from "../../SVG/PlainPhone";
 
 import { getTopCallers } from "../../../api";
 
@@ -32,29 +30,18 @@ const TopCallers = () => {
         }
 
         return callers.map(({ phoneNumber, count }) => (
-            <Link
+            <NumberCard
                 key={ phoneNumber }
-                to={ `/numbers/${phoneNumber}` }
-            >
-                <DetailCard
-                    active
-                    title={ phoneNumber }
-                    first={ `${count} total calls` }
-                    icon={ () => (
-                        <Phone
-                            className={ styles["top-callers-icon"] }
-                        />
-                    ) }
-                    iconClassName={ styles["top-callers-icon-container"] }
-                />
-            </Link>
+                number={ phoneNumber }
+                count={ count }
+            />
         ));
     }
 
     return (
         <Section
             component="div"
-            heading="Phone numbers"
+            heading="Top phone numbers"
             headingSize="small"
             contentClassName={ styles.content }
         >

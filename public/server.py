@@ -42,7 +42,7 @@ class ResponseApi():
 
         rcallers = []
         for num in nums:
-            rcallers.append(self.json(self.callers.reset_index()[num]))
+            rcallers.append(self.json(self.callers.reset_index()[num:num + 1]))
         return rcallers
 
     # Sample output:
@@ -111,7 +111,7 @@ class ResponseApi():
 
     def json(self, dataframe):
         return dataframe.to_json(orient='index')
- 
+
     def echo(self, text='Connection successful!'):
         return text
 
