@@ -92,28 +92,50 @@ function start() {
                 console.log(error);
             } else {
                 console.log(res);
+
+                event.sender.send("upload-done");
             }
         });
     });
 
-    ipcMain.on("topcallers", (event, data) => {
+    ipcMain.on("topcallers", event => {
         // 1, 5 are start, end for pagination
         client.invoke("topcallers", 0, 5, (error, res) => {
             if (error) {
                 console.error(error);
             } else {
                 console.log("topcallers dispatched response!");
+
                 event.sender.send("topcallers-reply", res);
             }
         });
     });
 
     ipcMain.on("person", (event, data) => {
-        client.invoke("person", 8453893220, (error, res) => {
+        console.log(`Looking up ${data}...`);
+
+        // Must be number
+        const lookup = Number.parseInt(data, 10);
+
+        client.invoke("person", lookup, (error, res) => {
             if (error) {
                 console.error(error);
             } else {
-                console.log(res);
+                console.log("person dispatched response!");
+
+                event.sender.send("person-reply", res);
+            }
+        });
+    });
+
+    ipcMain.on("random-numbers", (event, count = 5) => {
+        client.invoke("randcallers", count, (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log("randcallers dispatched response!");
+
+                event.sender.send(result);
             }
         });
     });
