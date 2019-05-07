@@ -87,7 +87,7 @@ function start() {
             return;
         }
 
-        client = new zerorpc.Client({ heartbeatInterval: 300000, timeout: 300 });
+        client = new zerorpc.Client({ heartbeatInterval: 100000, timeout: 100 });
         client.connect("tcp://127.0.0.1:6111");
         client.invoke("start", data, (error, res) => {
             if (error) {

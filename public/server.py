@@ -87,10 +87,14 @@ class ResponseApi():
             endEmotion = []
             avgEmotion = []
             for i in reportSet[ANXIETY_COL]:
-                levels = i.split(' to ')
-                starte = self.rankanxiety(levels[0])
-                ende = self.rankanxiety(levels[1])
-
+                try:
+                    levels = i.split(' to ')
+                
+                    starte = self.rankanxiety(levels[0])
+                    ende = self.rankanxiety(levels[1])
+                except Exception as e:
+                    starte = 0
+                    ende = 0
                 startEmotion.append(starte)
                 endEmotion.append(ende)
                 avgEmotion.append((starte + ende) / 2)
