@@ -40,7 +40,7 @@ const TopCallers = () => {
     return (
         <Section
             component="div"
-            heading="Phone numbers"
+            heading="Top phone numbers"
             headingSize="small"
             contentClassName={ styles.content }
         >
