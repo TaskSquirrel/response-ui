@@ -22,19 +22,28 @@ const ViewNumber = ({ match }) => {
         return data.reduce((accumulator, { length }) => accumulator + length, 0) / data.length;
     }
 
+    function getEmotionData() {
+        const first = data[0];
+        const last = data[data.length - 1];
+
+        return {
+            started: first.averageEmotion,
+            ended: last.averageEmotion
+        };
+    }
+
     if (!data) {
         return (
             <Loading />
         );
     }
 
-    console.log(data);
-
     return (
         <ViewNumberView
             number={ number }
             count={ data.length }
             average={ calculateAverageCallLength() }
+            emotion={ getEmotionData() }
             reports={ data }
         />
     );

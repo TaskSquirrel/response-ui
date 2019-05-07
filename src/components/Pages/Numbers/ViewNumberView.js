@@ -3,21 +3,25 @@ import PropTypes from "prop-types";
 
 import withSkeleton from "../../Layout/withSkeleton";
 import MetricLabel from "./MetricLabel";
+import ReportCard from "./ReportCard";
 
 import phoneNumberize from "../../../utils/phone";
 
 import styles from "./Numbers.module.scss";
-import ReportCard from "./ReportCard";
 
 const ViewNumberView = ({
     number,
     count,
     average,
+    emotion,
     reports
 }) => {
     function round(n) {
         return Math.round(n * 100) / 100;
     }
+
+    const startEmotion = emotion.started;
+    const endEmotion = emotion.ended;
 
     return (
         <React.Fragment>
@@ -38,6 +42,14 @@ const ViewNumberView = ({
                         value={ round(average) }
                         unit="min. average call time"
                     />
+                    <MetricLabel
+                        value={ startEmotion || "N/A" }
+                        unit="starting anxiety"
+                    />
+                    <MetricLabel
+                        value={ endEmotion || "N/A" }
+                        unit="ending anxiety"
+                    />
                 </div>
             </div>
             <div
@@ -54,6 +66,7 @@ const ViewNumberView = ({
                             length
                         }) => (
                             <ReportCard
+                                key={ reportNumber }
                                 reportNumber={ reportNumber }
                                 date={ date }
                                 type={ type }
@@ -74,6 +87,7 @@ ViewNumberView.propTypes = {
     number: PropTypes.string.isRequired,
     count: PropTypes.number,
     average: PropTypes.number,
+    emotion: PropTypes.shape({}).isRequired,
     reports: PropTypes.arrayOf(PropTypes.shape({}))
 };
 

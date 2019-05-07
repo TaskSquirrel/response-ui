@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import CardBase from "../../UI/CardBase";
 
 import Badge from "../../UI/Badge";
+import MetricLabel from "./MetricLabel";
 
 import styles from "./ReportCard.module.scss";
-import MetricLabel from "./MetricLabel";
 
 const ReportCard = ({
     reportNumber,
@@ -36,6 +36,7 @@ const ReportCard = ({
     return (
         <CardBase
             active
+            className={ styles.card }
         >
             <div
                 className={ styles.inner }
