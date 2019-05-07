@@ -5,6 +5,8 @@ import CardBase from "../../UI/CardBase";
 import Badge from "../../UI/Badge";
 import MetricLabel from "./MetricLabel";
 
+import toEmotion from "../../../utils/emotion";
+
 import styles from "./ReportCard.module.scss";
 
 const ReportCard = ({
@@ -64,11 +66,11 @@ const ReportCard = ({
                             unit="minutes"
                         />
                         <MetricLabel
-                            value={ startEmotion }
+                            value={ toEmotion(startEmotion) }
                             unit="start anxiety"
                         />
                         <MetricLabel
-                            value={ endEmotion }
+                            value={ toEmotion(endEmotion) }
                             unit="end anxiety"
                         />
                     </div>
@@ -86,8 +88,13 @@ ReportCard.propTypes = {
     date: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     length: PropTypes.number.isRequired,
-    startEmotion: PropTypes.number.isRequired,
-    endEmotion: PropTypes.number.isRequired
+    startEmotion: PropTypes.number,
+    endEmotion: PropTypes.number
+};
+
+ReportCard.defaultProps = {
+    startEmotion: 0,
+    endEmotion: 0
 };
 
 export default ReportCard;

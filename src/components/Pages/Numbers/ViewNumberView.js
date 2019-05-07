@@ -8,6 +8,7 @@ import TextBox from "../../Form/TextBox";
 
 import noop from "../../../utils/noop";
 import phoneNumberize from "../../../utils/phone";
+import toEmotion from "../../../utils/emotion";
 
 import styles from "./Numbers.module.scss";
 
@@ -72,11 +73,11 @@ const ViewNumberView = ({
                         unit="min. average call time"
                     />
                     <MetricLabel
-                        value={ startEmotion || "N/A" }
+                        value={ toEmotion(startEmotion) }
                         unit="starting anxiety"
                     />
                     <MetricLabel
-                        value={ endEmotion || "N/A" }
+                        value={ toEmotion(endEmotion) }
                         unit="ending anxiety"
                     />
                 </div>

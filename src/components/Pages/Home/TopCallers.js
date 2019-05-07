@@ -31,6 +31,7 @@ const TopCallers = () => {
 
         return callers.map(({ phoneNumber, count }) => (
             <NumberCard
+                key={ phoneNumber }
                 number={ phoneNumber }
                 count={ count }
             />
