@@ -147,7 +147,7 @@ function start() {
             } else {
                 console.log("randcallers dispatched response!");
 
-                event.sender.send(result);
+                event.sender.send("random-numbers-reply", result);
             }
         });
     });
