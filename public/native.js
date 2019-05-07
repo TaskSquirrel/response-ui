@@ -14,6 +14,7 @@ const { ELECTRON_WEB_URL } = process.env;
 const port = "6111";
 let serv = null;
 let client = null;
+let ready = false;
 
 const connect = () => {
     // const api = path.join(__dirname, "server.py");
@@ -76,10 +77,11 @@ function start() {
         notif.show();
     });
 
-
     // for Ben: Hard-coded data for now -- use data to pass in what you need
     ipcMain.on("upload", (event, data) => {
         console.log("Received: ", data);
+
+        ready = false;
 
         if (!data) {
             return;
@@ -92,9 +94,17 @@ function start() {
                 console.log(error);
             } else {
                 console.log(res);
+                ready = true;
 
                 event.sender.send("upload-done");
             }
+        });
+    });
+
+    ipcMain.on("online-check", event => {
+        event.sender.send("online-check-reply", {
+            client: client ? 1 : 0,
+            ready: ready ? 1 : 0
         });
     });
 
@@ -143,4 +153,5 @@ function start() {
 
 app.on("ready", start);
 app.on("will-quit", exit);
+app.on("quit", () => app.quit());
 app.on("window-all-closed", () => app.quit());
