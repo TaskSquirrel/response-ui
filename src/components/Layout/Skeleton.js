@@ -21,7 +21,6 @@ const Skeleton = ({
         <div
             className={ styles.right }
         >
-            <Header />
             <main>
                 { children }
             </main>
