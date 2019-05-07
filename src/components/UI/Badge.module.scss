@@ -1,0 +1,25 @@
+.badge {
+    border: 1px solid var(--black);
+    border-radius: 5px;
+    padding: 0.05rem 0.3rem;
+
+    font-size: 0.9rem;
+
+    &.purple {
+        border-color: var(--purple);
+
+        color: var(--purple);
+    }
+
+    &.sand {
+        border-color: var(--sand);
+
+        color: var(--sand);
+    }
+
+    &.jungle {
+        border-color: var(--jungle);
+
+        color: var(--jungle);
+    }
+}

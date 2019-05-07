@@ -6,11 +6,13 @@ import styles from "./CardBase.module.scss";
 
 const CardBase = ({
     children,
-    className
+    className,
+    active
 }) => (
     <div
         className={ classNames(
             styles.card,
+            active && styles.active,
             className
         ) }
     >
@@ -20,11 +22,13 @@ const CardBase = ({
 
 CardBase.propTypes = {
     children: PropTypes.node.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    active: PropTypes.bool
 };
 
 CardBase.defaultProps = {
-    className: null
+    className: null,
+    active: false
 };
 
 export default CardBase;

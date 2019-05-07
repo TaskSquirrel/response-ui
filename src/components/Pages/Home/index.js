@@ -1,14 +1,18 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
+import { withDataStore } from "../../DataStoreContext";
+import Loading from "../../Layout/Loading";
 import withSkeleton from "../../Layout/withSkeleton";
+import TopCallers from "./TopCallers";
 import Section from "../../UI/Section";
 import InfoCard from "../../UI/InfoCard";
 import ActionCard from "../../UI/ActionCard";
-import DetailCard from "../../UI/DetailCard";
 
 import styles from "./Dashboard.module.scss";
 
-const Home = () => {
+const Home = ({ value }) => {
     const actions = [
         {
             title: "Search by phone number",
@@ -23,6 +27,7 @@ const Home = () => {
             link: "/"
         }
     ];
+
     const stats = [
         {
             title: "Total Calls",
@@ -38,6 +43,31 @@ const Home = () => {
             value: 582
         }
     ];
+
+    const { loaded, uploaded } = value;
+
+    if (!uploaded) {
+        return (
+            <Redirect
+                to="/wizard"
+            />
+        );
+    }
+
+    if (!loaded) {
+        return (
+            <Loading
+                timeout={ 5000 }
+                timeoutRender={ () => (
+                    <div
+                        className={ styles.spinner }
+                    >
+                        One moment...
+                    </div>
+                ) }
+            />
+        );
+    }
 
     return (
         <div
@@ -73,33 +103,22 @@ const Home = () => {
                 heading="Data"
                 contentClassName={ styles.numbers }
             >
-                <Section
-                    component="div"
-                    heading="Phone numbers"
-                    headingSize="small"
-                    contentClassName={ styles.content }
-                >
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                </Section>
+                <TopCallers />
                 <Section
                     component="div"
                     heading="Call Reports"
                     headingSize="small"
                     contentClassName={ styles.content }
                 >
-                    <DetailCard active />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
-                    <DetailCard />
+                    Failed to load module!
                 </Section>
             </Section>
         </div>
     );
 };
 
-export default withSkeleton(Home);
+Home.propTypes = {
+    value: PropTypes.shape({}).isRequired
+};
+
+export default withSkeleton(withDataStore(Home));

@@ -16,6 +16,7 @@ const ActionCard = ({
     function renderCard() {
         return (
             <CardBase
+                active={ !!link }
                 className={ classNames(
                     styles.card,
                     className

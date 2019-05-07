@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import styles from "./InfoCard.module.scss";
@@ -25,11 +24,15 @@ const InfoCardItem = ({
             >
                 { value }
             </div>
-            <div
-                className={ styles.unit }
-            >
-                { unit }
-            </div>
+            {
+                unit && (
+                    <div
+                        className={ styles.unit }
+                    >
+                        { unit }
+                    </div>
+                )
+            }
         </div>
     </li>
 );
@@ -40,7 +43,11 @@ InfoCardItem.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    unit: PropTypes.string.isRequired
+    unit: PropTypes.string
+};
+
+InfoCardItem.defaultProps = {
+    unit: null
 };
 
 export default InfoCardItem;
