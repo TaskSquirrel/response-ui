@@ -1,5 +1,9 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
+import { withDataStore } from "../../DataStoreContext";
+import Loading from "../../Layout/Loading";
 import withSkeleton from "../../Layout/withSkeleton";
 import TopCallers from "./TopCallers";
 import Section from "../../UI/Section";
@@ -8,7 +12,7 @@ import ActionCard from "../../UI/ActionCard";
 
 import styles from "./Dashboard.module.scss";
 
-const Home = () => {
+const Home = ({ value }) => {
     const actions = [
         {
             title: "Search by phone number",
@@ -39,6 +43,31 @@ const Home = () => {
             value: 582
         }
     ];
+
+    const { loaded, uploaded } = value;
+
+    if (!uploaded) {
+        return (
+            <Redirect
+                to="/wizard"
+            />
+        );
+    }
+
+    if (!loaded) {
+        return (
+            <Loading
+                timeout={ 5000 }
+                timeoutRender={ () => (
+                    <div
+                        className={ styles.spinner }
+                    >
+                        One moment...
+                    </div>
+                ) }
+            />
+        );
+    }
 
     return (
         <div
@@ -88,4 +117,8 @@ const Home = () => {
     );
 };
 
-export default withSkeleton(Home);
+Home.propTypes = {
+    value: PropTypes.shape({}).isRequired
+};
+
+export default withSkeleton(withDataStore(Home));

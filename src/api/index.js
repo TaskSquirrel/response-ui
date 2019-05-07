@@ -64,8 +64,50 @@ function getTopCallers() {
         .catch(e => console.error(e));
 }
 
+function getPhoneNumberData(number) {
+    return promisify("person", number)
+        .then(str => JSON.parse(str))
+        .then(data => {
+            const callReportNumberLabel = "CallReportNum";
+            const dateLabel = "EnteredOn";
+            const callTypeLabel = "Call Information - Call Type";
+            const startTimeLabel = "CallDateAndTimeStart";
+            const endTimeLabel = "CallDateAndTimeEnd";
+            const callLengthLabel = "CallLength";
+            const genderLabel = "Caller Information - Gender";
+            const categoryLabel = "Caller Issues - Category";
+            const workerLabel = "PhoneWorkerNum";
+            const reviewedLabel = "Reviewed";
+
+            const keys = Object.keys(data);
+            const mapped = keys.map(key => {
+                const entry = data[key];
+
+                return {
+                    number,
+                    reportNumber: entry[callReportNumberLabel],
+                    date: entry[dateLabel],
+                    type: entry[callTypeLabel],
+                    startTime: entry[startTimeLabel],
+                    endTime: entry[endTimeLabel],
+                    length: entry[callLengthLabel],
+                    gender: entry[genderLabel],
+                    category: entry[categoryLabel],
+                    worker: entry[workerLabel],
+                    reviewed: entry[reviewedLabel],
+                    startEmotion: entry.startEmotion,
+                    averageEmotion: entry.avgEmotion,
+                    endEmotion: entry.endEmotion,
+                };
+            });
+
+            return mapped.reverse();
+        });
+}
+
 export {
     request,
     promisify,
-    getTopCallers
+    getTopCallers,
+    getPhoneNumberData
 };

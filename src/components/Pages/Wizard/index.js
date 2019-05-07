@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
+import { withDataStore } from "../../DataStoreContext";
 import Landing from "./Landing";
 import WizardViewWrapper from "./WizardViewWrapper";
 import WizardView from "./WizardView";
@@ -7,7 +9,9 @@ import Results from "./Results";
 
 import wizardSlides from "./wizard";
 
-const Wizard = () => {
+import electron from "../../../utils/electron";
+
+const Wizard = ({ value }) => {
     const [started, setStarted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [step, setStep] = useState(0);
@@ -38,11 +42,20 @@ const Wizard = () => {
     }
 
     function done() {
+        const { setUploaded, setLoaded } = value;
+
+        // For home page
+        setUploaded(true);
+        setLoaded(false);
+
         setLoading(true);
 
-        const filePaths = files.map(({ file: { path } }) => path);
+        // Lookup write-ups path
+        const writeUps = files.find(({ id }) => id === "write-ups").file.path;
 
-        console.log(filePaths);
+        console.log("Dispatching to server:", writeUps);
+
+        electron.ipcRenderer.send("upload", writeUps);
     }
 
     function renderWizardView() {
@@ -117,4 +130,8 @@ const Wizard = () => {
     );
 };
 
-export default Wizard;
+Wizard.propTypes = {
+    value: PropTypes.shape({}).isRequired
+};
+
+export default withDataStore(Wizard);
